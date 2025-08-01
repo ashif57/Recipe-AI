@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe-AI | Smart Recipe Preparation Agent</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Recipe-AI</h1>
+            <p class="subtitle">Discover delicious recipes using ingredients you already have</p>
+        </header>
+
+        <div class="form-container">
+            <form action="/" method="post">
+                <div class="form-group">
+                    <label for="ingredients">What ingredients do you have?</label>
+                    <textarea 
+                        id="ingredients" 
+                        name="ingredients" 
+                        rows="6" 
+                        placeholder="Enter your available ingredients separated by commas (e.g., chicken, tomato, cheese, onion, garlic)"
+                        required
+                    ></textarea>
+                </div>
+                <button type="submit" class="btn">Find Recipes</button>
+            </form>
+        </div>
+
+        {% if recipes %}
+        <div class="results-section">
+            <h2 class="results-header">AI-Generated Recipe Suggestions</h2>
+            {% for r in recipes %}
+            <div class="recipe-card">
+                <h3 class="recipe-title">{{ r.title }}</h3>
+                <div class="recipe-steps">{{ r.steps }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-state-icon">🍳</div>
+            <div class="empty-state-text">Ready to cook something amazing?</div>
+            <div class="empty-state-subtext">Enter your ingredients above to get personalized recipe suggestions powered by AI</div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
